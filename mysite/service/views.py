@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.db import models
+from django.shortcuts import render, get_object_or_404, HttpResponse
 from .models import Category, Item
-# Create your views here.
 
 
 def item_list(request, category_slug=None):
@@ -16,7 +16,18 @@ def item_list(request, category_slug=None):
                        'categories': categories,
                        'items': items})
 
+    return render(request, 'service/item/list.html',
+                  {'category': category,
+                   'categories': categories,
+                   'items': items})
+'''
+render(request, 'service/item/list.html',
+                      {'category': category,
+                       'categories': categories,
+                       'items': items})
+'''
 
-def item_detail(request, id, slug):
-    item = get_object_or_404(Item, id=id, slug=slug, available=True)
+
+def item_detail(request, slug, id):
+    item = get_object_or_404(Item, slug=slug, id=id, available=True)
     return render(request, 'service/item/detail.html', {'item': item})

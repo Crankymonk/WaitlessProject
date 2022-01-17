@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "service/base.html" %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="item-detail">
+    <img src="{% if item.image %}{{ item.image.url }}{% else %}{% static "images/no_image.png" %}{% endif %}">
+    <h1>{{ item.name }}</h1>
+    <h2><a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></h2>
+    <p class="price">${{ item.price }}</p>
+    {{ item.description|linebreaks }}
+  </div>
+{% endblock %}
