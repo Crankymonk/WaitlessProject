@@ -1,6 +1,7 @@
 from django.db import models
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from .models import Category, Item
+from cart.forms import CartAddItemForm
 
 
 def item_list(request, category_slug=None):
@@ -30,4 +31,7 @@ render(request, 'service/item/list.html',
 
 def item_detail(request, slug, id):
     item = get_object_or_404(Item, slug=slug, id=id, available=True)
-    return render(request, 'service/item/detail.html', {'item': item})
+    cart_item_form = CartAddItemForm()
+    return render(request, 'service/item/detail.html',
+                  {'item': item,
+                   'cart_item_form': cart_item_form})
