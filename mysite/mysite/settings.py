@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-go+%07&skpvggcgf7po^mf@17c^=(=0v7$gpbq)mgnoou(r9!a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['waitless.com', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'service.apps.ServiceConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -66,7 +67,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.context_processors.cart'
+                'cart.context_processors.cart',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -109,9 +112,29 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 ]
+
+# Facebook authenticate
+SOCIAL_AUTH_FACEBOOK_KEY = '469271204590566'  # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '97da6ac32e1e3603cbe96a5e9e31f1ef'  # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'fields': 'name, email, age_range'}
+
+# Google authenticate
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '875587744722-p1nmbuvvf3qs3n31lmbol4453ee4v4mk.apps.googleusercontent.com' # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
+
+# VK authenticate
+SOCIAL_AUTH_VK_OAUTH2_KEY = '8057204'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'n4JVdJB8meh5heC1mP99'
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = [...]
+
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/success/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -143,10 +166,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CART_SESSION_ID = 'cart'
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = 'login'
 
 LOGOUT_URL = 'logout'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SOCIAL_AUTH_POSTGRES_JSONFIELD_ENABLED = True
+
