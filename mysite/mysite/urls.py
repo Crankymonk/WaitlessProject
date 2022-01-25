@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+handler404 = "mysite.views.page_not_found_view"
+handler500 = "mysite.views.server_error_view"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +29,8 @@ urlpatterns = [
     path('orders/', include('orders.urls', namespace='orders')),
     path('', include('service.urls', namespace='service')),
 ]
+
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

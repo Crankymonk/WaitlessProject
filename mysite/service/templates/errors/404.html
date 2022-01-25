@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}My service{% endblock %}</title>
+        <link rel="stylesheet type="text/css" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+        <div id="header">
+          <a href="/" class="logo">My service</a>
+          {% if request.user.is_authenticated %}
+            <ul class="menu">
+              <li {% if section == "dashboard" %}class="selected"{% endif %}>
+                <a href="{% url "dashboard" %}">My dashboard</a>
+              </li>
+          {% endif %}
+        <span class="user">
+          {% if request.user.is_authenticated %}
+            Hello {{ request.user.username }},
+            <a href="{% url "logout" %}">Logout</a>
+          {% else %}
+            <a href="{% url "login" %}">Log-in</a>
+          {% endif %}
+        </span>
+  </div>
+        </div>
+        <div id="subheader">
+            <div class="cart">
+              {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                  Your cart:
+                  <a href="{% url "cart:cart_detail" %}">
+                    {{ total_items }} item{{ total_items|pluralize }},
+                    {{ cart.get_total_price }}BYN
+            </a>
+          {% else %}
+            Your cart is empty.
+          {% endif %}
+        {% endwith %}</div>
+        </div>
+        <div id="content">
+            {% block content %}
+            <img src="{% static "images/error-404.jpg" %}" alt='404 image'>
+        <p>Page not found. Sorry.</p>
+            {% endblock %}
+        </div>
+    </body>
+</html>
+

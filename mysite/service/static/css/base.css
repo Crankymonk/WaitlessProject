@@ -1,9 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
 
 body {
     margin:0;
     padding:0;
     font-family:helvetica, sans-serif;
+    background: linear-gradient(180deg, rgba(10, 0, 97, 0.02) 10%, #1512cca8 99.90%);
 }
 
 h1, h2, h3, h4, h5 , h6 {
@@ -12,11 +14,11 @@ h1, h2, h3, h4, h5 , h6 {
 
 a {
     text-decoration:none;
-    color:#5993bb;
+    color:black;
 }
 
 a:hover {
-    color:#77b6e2;
+    color:gray;
 }
 
 a.button, input[type="submit"] {
@@ -120,22 +122,81 @@ ul.errorlist {
     padding:10px 100px;
     font-size:18px;
     overflow:auto;
+    position: fixed;
+    background: linear-gradient(0deg, rgba(8, 2, 98, 0.55) 0%, #14006b 42.00%);
+    width: 100%
 }
 
 #subheader {
     background:#ececec;
     color:#444;
-    padding:15px 100px;
+    padding:150px 100px 15px;
     overflow:auto;
 }
 
 #header .logo {
-    font-family: 'Ubuntu', sans-serif;
+    text-decoration: none;
+    font-family: 'Sedgwick Ave', cursive;
     float:left;
-    color:#333;
-    font-size:22px;
+    color:rgb(255, 255, 255);
+    font-size:32px;
     margin-right:10%;
 }
+.menu {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding-left: 57px;
+  }
+
+menu.ul {
+    display: inline-block;
+}
+
+.container {
+    width: 1170px;
+    margin: auto;
+  } 
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 1170;
+  }
+
+
+.menu-item {
+    margin-right: 25px;
+  }
+.menu-link {
+    color: white;
+    text-decoration: none;
+  }
+.m-menu {
+	display: none;
+}
+
+.user {
+    margin-left: 10px;
+    color: #fff;
+    display: block;
+    align-items: center;
+  }
+div.user{
+    text-decoration:lavender;
+    color:honeydew;
+}
+  .log {
+    text-decoration:lavender;
+    color:rgb(105, 118, 150);
+  }
+
+[href]{
+    text-decoration: underline;
+}
+
 
 #subheader .cart {
     float:right;
@@ -348,3 +409,56 @@ form div.field {
 .social li.google { background:#de1710; }
 
 .social li.vk { background:#0077FF; }
+
+li.vk a, li.google a{
+    text-decoration: none;
+}
+
+@media (max-width: 1200px) {
+    .container {
+      max-width: 760px;
+    }
+  .user {
+      margin-left: 10px;
+  
+  }
+  @media (max-width: 992px) {
+      .container {
+          max-width: 750px
+      }
+      .menu-item {
+          margin-right: 20px;
+      }
+  }
+    @media (max-width: 768px) {
+      .container {
+          max-width: 560px
+      }
+      .menu {
+          position: absolute;
+          left: 0;
+          top: 30px;
+          padding-left: 20px;
+          margin-left: 20px;
+          flex-direction: column;
+          background-color: #621402;
+          z-index: 9;
+          border-radius:10px;
+          display:none;
+      }
+      menu:hover{
+          display: flex;
+      }
+      .menu-item:not(:last-child)  {
+          margin-bottom: 10px;
+  
+      }
+      .m-menu {
+          display: block;
+          background-color: transparent;
+          border: none;
+          width: 40px;
+          height: 40px;
+          margin-left: 10px;
+          cursor: pointer;
+      }

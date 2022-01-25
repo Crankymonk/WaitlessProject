@@ -3,34 +3,62 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}My service{% endblock %}</title>
         <link rel="stylesheet type="text/css" href="{% static 'css/base.css' %}">
     </head>
     <body>
         <div id="header">
-          <a href="/" class="logo">My service</a>
+          <a href="/" class="logo">Waitless</a>
+          <div class="navbar container">
+            <nav class="nav">
+              <button class="m-menu">
+                <svg
+                  width="15"
+                  height="9"
+                  viewBox="0 0 15 9"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line y1="0.5" x2="15" y2="0.5" stroke="white" />
+                  <line y1="4.5" x2="15" y2="4.5" stroke="white" />
+                  <line y1="8.5" x2="15" y2="8.5" stroke="white" />
+                </svg>
+              </button>
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="/" class="menu-link">Главная</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="menu-link">Меню</a>
+                </li>
+                <li {% if section == "dashboard" %}class="selected"{% endif %} class="menu-item">
+                  <a href="{% url "dashboard" %}" class="menu-link">История заказов</a>
+                </li>
+                <li  class="menu-item">
+                  <a href="#" class="menu-link">О нас</a>
+                </li>
+                <li {% if section == "contacts" %}class="selected"{% endif %} class="menu-item">
+                  <a href="#" class="menu-link">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="user">
+              {% if request.user.is_authenticated %}
+                Hello {{ request.user.username }},
+                <a class="log" href="{% url "logout" %}">Logout</a>
+              {% else %}
+                <a class="log" href="{% url "login" %}">Log-in</a>
+              {% endif %}
+            </div>
+          </div>
+          <!-- /.navbar -->
           {% if request.user.is_authenticated %}
-            <ul class="menu">
-              <li {% if section == "dashboard" %}class="selected"{% endif %}>
-                <a href="{% url "dashboard" %}">My dashboard</a>
-              </li>
-              <li {% if section == "images" %}class="selected"{% endif %}>
-                <a href="#">Images</a>
-              </li>
-              <li {% if section == "people" %}class="selected"{% endif %}>
-                <a href="#">People</a>
-              </li>
-            </ul>
+          
           {% endif %}
 
-        <span class="user">
-          {% if request.user.is_authenticated %}
-            Hello {{ request.user.username }},
-            <a href="{% url "logout" %}">Logout</a>
-          {% else %}
-            <a href="{% url "login" %}">Log-in</a>
-          {% endif %}
-        </span>
+        
   </div>
         </div>
         <div id="subheader">
@@ -48,7 +76,21 @@
         {% endwith %}</div>
         </div>
         <div id="content">
-            {% block content %}{% endblock %}
+            {% block content %}
+            <div class="container">
+                <ul class="catalog">
+
+                    <li class="card">
+                        <img class="card__image" src="img/temp.jpg" alt="test">
+                        <div class="card__description">
+                            <h3 class="card__header">Тестовая карточка</h3>
+                            <div class="card__price">4000 ₽</div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            {% endblock %}
         </div>
     </body>
 </html>

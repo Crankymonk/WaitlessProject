@@ -30,9 +30,9 @@ class Item(models.Model):
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='items/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
+    note = models.TextField(blank=True)
     price = models.DecimalField(max_digits=5, decimal_places=1)
     available = models.BooleanField(default=True)
-
     class Meta:
         ordering = ('name',)
         index_together = (('slug', 'id'),)

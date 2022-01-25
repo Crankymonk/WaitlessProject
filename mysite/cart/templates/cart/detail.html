@@ -10,6 +10,7 @@
       <tr>
         <th>Image</th>
         <th>Product</th>
+        <th>Note</th>
         <th>Quantity</th>
         <th>Remove</th>
         <th>Unit price</th>
@@ -26,6 +27,7 @@
               </a>
             </td>
             <td>{{ product.name }}</td>
+            <td>{{ product.note }}</td>
             <td><form action="{% url "cart:cart_add" product.id %}" method="post">
                 {{ piece.update_quantity_form.quantity }}
                 {{ piece.update_quantity_form.update }}
