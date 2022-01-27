@@ -1,5 +1,5 @@
 from django.db import models
-from service.models import Item
+from service.models import Item, Staff
 # Create your models here.
 
 class Order(models.Model):
@@ -41,3 +41,14 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+class CallItem(models.Model):
+    worker = models.CharField(max_length=250)
+    order = models.ForeignKey(Order,
+                              default='123',
+                              related_name='order',
+                              on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.id)

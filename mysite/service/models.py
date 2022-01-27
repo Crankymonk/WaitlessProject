@@ -42,3 +42,12 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('service:item_detail', args=[self.slug, self.id])
+
+
+class Staff(models.Model):
+    name = models.CharField(default='Andrei', max_length=200, db_index=True)
+    position = models.CharField(default='shishamaster', max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True)
+    image = models.ImageField(upload_to='items/%Y/%m/%d', blank=True)
+    description = models.TextField(blank=True)
+    available = models.BooleanField(default=True)

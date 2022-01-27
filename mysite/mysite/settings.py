@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-go+%07&skpvggcgf7po^mf@17c^=(=0v7$gpbq)mgnoou(r9!a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['waitless.com', 'localhost', '127.0.0.1']
 
@@ -130,11 +130,9 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '875587744722-p1nmbuvvf3qs3n31lmbol4453ee4v4mk.a
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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' # Google Consumer Secret
 
 # VK authenticate
-SOCIAL_AUTH_VK_OAUTH2_KEY = '8057204'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'n4JVdJB8meh5heC1mP99'
-# SOCIAL_AUTH_VK_OAUTH2_SCOPE = [...]
-
-# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/success/'
+SOCIAL_AUTH_VK_OAUTH2_KEY = '8057204' # VK app id
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'n4JVdJB8meh5heC1mP99' # VK Secret Key
+# SOCIAL_AUTH_VK_OAUTH2_SCOPE = [email]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

@@ -1,10 +1,10 @@
 {% extends "service/base.html" %}
 
-{% block title %}Edit your account{% endblock %}
+{% block title %}Аккаунт{% endblock %}
 
 {% block content %}
-  <h1>Edit your account</h1>
-  <p>You can edit your account using the following form:</p>
+  <h1>Редактировать профиль</h1>
+  <p>Вы можете отредактировать свой профиль используя следующую форму:</p>
   <form action="." method="post" enctype="multipart/form-data">
     {{ user_form.as_p }}
     {{ profile_form.as_p }}

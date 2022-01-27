@@ -1,11 +1,26 @@
 {% extends "service/base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Личный кабинет{% endblock %}
 
 {% block content %}
-  <h1>Dashboard</h1>
-  <p>Welcome to your dashboard.
-  You can <a href="{% url "edit" %}">edit your profile</a> or
-<a href="{% url "password_change" %}">change your password</a>.
+  <h1>Личный кабинет</h1>
+  <p>Добро пожаловать в ваш личный кабинет.
+  Вы можете <a href="{% url "edit" %}">редактировать свой профиль</a> или
+<a href="{% url "password_change" %}">сменить пароль</a>.
   </p>
+  <hr>
+<h2>Ваша история заказов:</h2>
+<div id="order_history">
+
+  {% for order in orderhistory %}
+  <p>{{ order }} {{ order.created }} {{ order.email }} {{ order.served }}<p>
+  {% for item in related_orders.0 %}
+  {% if order %}
+  <p>{{ item.1 }} {{ item.2 }} {{ item.3 }} {{ item.4 }} <p>
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+
+
+</div>
 {% endblock %}

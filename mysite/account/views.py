@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Profile
+from orders.models import Order, OrderItem
+from service.models import Item
 # Create your views here.
 
 
@@ -30,7 +32,25 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    current_email = request.user.profile.user.email
+    orderhistory = Order.objects.filter(email=current_email)
+
+    related_orders = {}
+    counter = 0
+    for order in orderhistory:
+        ordercheck = OrderItem.objects.filter(order=orderhistory[counter])
+        x = 0
+        order_info = []
+        for item in ordercheck:
+            order_info.append([ordercheck[x].order, ordercheck[x].product, ordercheck[x].quantity, ordercheck[x].price])
+            related_orders[counter] = order_info
+            x += 1
+        counter += 1
+    count_of_orders = range(counter)
+    template = "account/dashboard.html"
+    context = {"orderhistory": orderhistory, "ordercheck": ordercheck, "related_orders": related_orders, "count_of_orders": count_of_orders}
+    return render(request, template, context)
+
 
 
 def register(request):
@@ -73,3 +93,4 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
     return render(request, 'account/edit.html',
                   {'user_form': user_form, 'profile_form': profile_form})
+

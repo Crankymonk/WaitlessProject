@@ -97,6 +97,10 @@ form p label {
     padding-bottom:4px;
 }
 
+form p label#id_room{
+    padding-bottom:0px;
+}
+
 form p input {
     width:300px;
     font-size:13px;
@@ -247,6 +251,7 @@ div.user{
 
 .item-list .item {
     width:25%;
+    min-height:280px;
     padding:10px 20px 10px 0;
     float:left;
     text-align:center;

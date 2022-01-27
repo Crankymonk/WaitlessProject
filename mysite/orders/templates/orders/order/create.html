@@ -8,7 +8,7 @@
   <h1>Checkout</h1>
 
   <div class="order-info">
-    <h3>Your order</h3>
+    <h3>Ваш заказ</h3>
     <ul>
       {% for item in cart %}
         <li>
@@ -17,12 +17,12 @@
         </li>
       {% endfor %}
     </ul>
-    <p>Total: {{ cart.get_total_price }}BYN</p>
+    <p>Итого: {{ cart.get_total_price }}BYN</p>
   </div>
 
   <form action="." method="post" class="order-form">
     {{ form.as_p }}
-    <p><input type="submit" value="Place order"></p>
+    <p><input type="submit" value="Разместить заказ"></p>
     {% csrf_token %}
   </form>
 {% endblock %}
